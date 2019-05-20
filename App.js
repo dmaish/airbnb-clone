@@ -1,23 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import { Explore, Inbox, Saved, Trips } from './screens';
+import { Explore, Inbox, Saved, Trips, Profile } from './screens';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-export class App extends Component {
-  state = {
-    isLoadingComplete: false,
-  };
-
-  render() {
-      return (
-        <View style={styles.container}>
-          <Text>First foot in the Native journey </Text>
-        </View>
-      );
-    
-  }
-}
 
 const BottomTabNavigator = createBottomTabNavigator({
   Explore: {
@@ -42,8 +27,8 @@ const BottomTabNavigator = createBottomTabNavigator({
     screen: Trips,
     navigationOptions: {
       tabBarLabel: 'TRIPS',
-      tabBarIcon: ({ tintColor }) => (
-        <Image source={require('./assets/images/airbnb.png')} />
+      tabBarIcon: ({tintColor}) => (
+        <Image source={require('./assets/images/airbnb.png')} style={{height: 22, width:22, tintColor:tintColor}} />
       ),
     }
   },
@@ -55,8 +40,27 @@ const BottomTabNavigator = createBottomTabNavigator({
         <Icon name='ios-chatboxes' color={ tintColor } size={24} />
       ),
     }
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      tabBarLabel: 'PROFILE',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name='ios-chatboxes' color={ tintColor } size={24} />
+      ),
+    }
   }
-});
+},
+{
+  tabBarOptions: {
+    activeTintColor: 'red',
+    inactiveTintColor: 'grey',
+    style: {
+      elevation: 5,
+      shadowColor: 'black',
+    }
+  }
+},);
 
 export default createAppContainer(BottomTabNavigator);
 
